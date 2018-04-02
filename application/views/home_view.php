@@ -30,10 +30,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#about">Home</a>
+              <a class="nav-link js-scroll-trigger" href="welcome">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#services">About</a>
+              <a class="nav-link js-scroll-trigger" href="welcome">About</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="blog">Blog</a>
@@ -49,31 +49,23 @@
       </div>
     </header>
 
-    <section id="about">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <h2>Tentang SMK PGRI 3 MALANG</h2>
-            <p class="lead">SMK PGRI 3 Malang adalah sekolah kejuruan PGRI terbesar di Jawa Timur, SNI, dan berstandar Internasional dengan motto "SUCCESS BY DISCIPLINE" segala unsur pendidikan yang ada berusaha menjadikan kelas-kelas yang ada di SMK PGRI 3 Malang sebagai kelas perusahaan dengan harapan lulusan bisa terserap sebanyak-banyaknya di industri. Sekolah ini beralamat di Jl. Raya Tlogomas IX/09 Malang. Dan Dalam rangka memantapkan eksistensi dan kepercayaan masyarakat Malang Raya khususnya dan masyarakat Indonesia pada umumnya, sejak tahun 2006 SMK PGRI 3 Malang telah menorehkan Tinta Emas kembali dengan dinyatakan sebagai sekolah "BESAR & NASIONAL " untuk bisa berkiprah di tingkat Nasional dengan predikat Sekolah Nasional.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="services" class="bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <h2>Jurusan yang ada di SMK PGRI 3 MALANG</h2>
-            <ul>
-              <li>Bidang Keahlian Elektronika dan TIK</li>
-              <li>Bidang Keahlian Teknik Mesin</li>
-              <li>Bidang Keahlian Teknik Otomotif</li>
-              <li>Bidang Keahlian Pemasaran</li>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div class="container text-center">
+			<?php foreach ($artikel as $key): ?>
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					<table style="margin-bottom: 30px;">
+						<tr>
+							<td>
+								<a href="blog/detail/<?php echo $key->id_blog ?>" style="color: black;">
+									<img src="img/<?php echo $key->image;?>" alt="Image" width="500" height="400">
+									<br>
+									<?php echo $key->judul_blog ?>
+								</a>
+							</td>
+						</tr>
+					</table>
+				</div>
+			<?php endforeach ?>
+		</div>
 
     
 
