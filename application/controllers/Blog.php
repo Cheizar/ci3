@@ -42,6 +42,16 @@ class Blog extends CI_Controller {
 		redirect('blog');
 	}
 
+	public function edit($id_blog) {
+		$this->load->model('artikel');
+		$data['a'] = $this->artikel->get_single($id_blog);
+		if ($this->input->post('edit')) {
+			$upload=$this->artikel->upload();
+			$this->artikel->edit($upload, $id_blog);
+		}
+		$this->load->view('form_edit', $data);
+	}
+
 }
 
 /* End of file Blog.php */

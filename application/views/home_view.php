@@ -61,7 +61,7 @@
 									<?php echo $key->judul_blog ?>
 								</a>
                 <br></br>
-                <button>Edit</button>
+                <a href="blog/edit/<?php echo $key->id_blog ?>">edit</a>
                 <a href='blog/delete/<?php echo $key->id_blog ?>' class='btn btn-sm btn-danger'>Hapus</a>
 							</td>
 						</tr>

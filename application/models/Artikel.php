@@ -48,6 +48,26 @@ class Artikel extends CI_Model {
 	public function hapus($id){
 		$query = $this->db->query('DELETE from blog WHERE id_blog= '.$id);
 	}
+
+	public function edit($upload, $id_blog){
+		if ($upload['result']=='success') {
+			$data = array(
+				'judul_blog' => $this->input->post('input_judul'),
+				'tanggal_blog' => $this->input->post('input_tanggal'),
+				'content' => $this->input->post('input_content'),
+				'image' => $upload['file']['file_name']
+			);
+		} else {
+			$data = array(
+				'judul_blog' => $this->input->post('input_judul'),
+				'tanggal_blog' => $this->input->post('input_tanggal'),
+				'content' => $this->input->post('input_content'),
+			);
+		}
+		$this->db->where('id_blog', $id_blog);
+		$this->db->update('blog', $data);
+	}
+	
 }
 
 /* End of file blog.php */
