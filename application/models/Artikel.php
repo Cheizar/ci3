@@ -17,7 +17,7 @@ class Artikel extends CI_Model {
 	public function upload()
 	{
 		$config['upload_path'] = './img/';
-		$config['allowed_types'] = 'jpg|png';
+		$config['allowed_types'] = 'jpg|png|jpeg';
 		$config['max_size']  = '2048';
 		$config['remove_space']  = TRUE;
 		

@@ -21,8 +21,21 @@ class Blog extends CI_Controller {
 	{
 		$this->load->model('artikel');
 		$data = array();
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('input_judul', 'judul_blog', 'required', array('required' => '%s harus diisi '));
+		$this->form_validation->set_rules('input_content', 'content', 'required', array('required' => '%s harus diisi '));
+		$this->form_validation->set_rules('input_tanggal', 'tanggal_blog', 'required', array('required' => '%s harus diisi '));
+		// $this->form_validation->set_rules('input_gambar', 'image', 'required', array('required' => 'isi %s, '));
+		$this->form_validation->set_rules('input_penerbit', 'penerbit', 'required', array('required' => '%s harus diisi '));
+		$this->form_validation->set_rules('input_sumber', 'sumber', 'required', array('required' => '%s harus diisi '));
+		$this->form_validation->set_rules('input_penulis', 'penulis', 'required', array('required' => '%s harus diisi '));
+		
 
-		if ($this->input->post('simpan')) {
+		if($this->form_validation->run()==FALSE) {
+			$this->load->view('form_tambah');
+		} 
+		else {
+			if ($this->input->post('simpan')) {
 			$upload = $this->artikel->upload();
 
 			if ($upload['result'] == 'success') {
@@ -32,8 +45,9 @@ class Blog extends CI_Controller {
 				$data['message'] = $upload['error'];
 			}
 		}
-
-		$this->load->view('home_view', $data);
+	}
+		
+		//$this->load->view('form_tambah', $data);
 	}
 
 	public function delete($id) {
@@ -44,12 +58,30 @@ class Blog extends CI_Controller {
 
 	public function edit($id_blog) {
 		$this->load->model('artikel');
-		$data['a'] = $this->artikel->get_single($id_blog);
-		if ($this->input->post('edit')) {
+		$data['artikel'] = $this->artikel->get_single($id_blog);
+		$data = array();
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('input_judul', 'judul_blog', 'required', array('required' => '%s harus diisi '));
+		$this->form_validation->set_rules('input_content', 'content', 'required', array('required' => '%s harus diisi '));
+		$this->form_validation->set_rules('input_tanggal', 'tanggal_blog', 'required', array('required' => '%s harus diisi '));
+		// $this->form_validation->set_rules('input_gambar', 'image', 'required', array('required' => 'isi %s, '));
+		$this->form_validation->set_rules('input_penerbit', 'penerbit', 'required', array('required' => '%s harus diisi '));
+		$this->form_validation->set_rules('input_sumber', 'sumber', 'required', array('required' => '%s harus diisi '));
+		$this->form_validation->set_rules('input_penulis', 'penulis', 'required', array('required' => '%s harus diisi '));
+		
+
+		if($this->form_validation->run()==FALSE) {
+			$this->load->view('form_tambah');
+		} 
+		else {
+			if ($this->input->post('edit')) {
 			$upload=$this->artikel->upload();
 			$this->artikel->edit($upload, $id_blog);
+			redirect('blog');
 		}
 		$this->load->view('form_edit', $data);
+	}
+		
 	}
 
 }

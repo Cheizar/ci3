@@ -70,9 +70,9 @@
 			<?php endforeach ?>
 		</div>
 
-    <div class="container">
+    <!-- <div class="container">
       <?php
-        echo form_open('blog/tambah', array('enctype'=>'multipart/form-data')); 
+        // echo form_open('blog/tambah', array('enctype'=>'multipart/form-data')); 
        ?>
       <table>
         <tr>
@@ -99,6 +99,12 @@
           <td colspan="3"><input type="submit" name="simpan" value="simpan"></td>
         </tr>
       </table>
+    </div> -->
+
+    <div class="="col-md-6">
+      <ul class="footer-nav">
+        <li><a href="blog/tambah">Tambah</a></li>
+      </ul>
     </div>
     
 
