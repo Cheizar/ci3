@@ -12,7 +12,13 @@ class Artikel extends CI_Model {
 	{
 		$query = $this->db->query('select * from blog where id_blog='.$id);
 		return $query->result();
-	}
+
+		$this->db->select('*');
+		$this->db->from('blog');
+		$this->db->join('kategori', 'blog.id_kategori = kategori.id_kategori');
+		$this->db->where('blog.id_blog='.$id);
+		return $this->db->get()->result();
+		}
 
 	public function upload()
 	{
@@ -39,7 +45,8 @@ class Artikel extends CI_Model {
 			'judul_blog' => $this->input->post('input_judul'),
 			'content' => $this->input->post('input_content'),
 			'tanggal_blog' => $this->input->post('input_tanggal'),
-			'image' => $upload['file']['file_name']
+			'image' => $upload['file']['file_name'],
+			'cat_name' => $this->input->post('cat_name')
 		);
 
 		$this->db->insert('blog', $data);
@@ -49,12 +56,15 @@ class Artikel extends CI_Model {
 		$query = $this->db->query('DELETE from blog WHERE id_blog= '.$id);
 	}
 
-	public function edit($upload, $id_blog){
+	public function edit($upload, $id){
 		if ($upload['result']=='success') {
 			$data = array(
 				'judul_blog' => $this->input->post('input_judul'),
 				'tanggal_blog' => $this->input->post('input_tanggal'),
 				'content' => $this->input->post('input_content'),
+				'penerbit' => $this->input->post('input_penerbit'),
+				'sumber' => $this->input->post('input_sumber'),
+				'id_kategori' => $this->input->post('id_kategori'),
 				'image' => $upload['file']['file_name']
 			);
 		} else {
@@ -62,6 +72,9 @@ class Artikel extends CI_Model {
 				'judul_blog' => $this->input->post('input_judul'),
 				'tanggal_blog' => $this->input->post('input_tanggal'),
 				'content' => $this->input->post('input_content'),
+				'penerbit' => $this->input->post('input_penerbit'),
+				'sumber' => $this->input->post('input_sumber'),
+				'id_kategori' => $this->input->post('id_kategori'),
 			);
 		}
 		$this->db->where('id_blog', $id_blog);

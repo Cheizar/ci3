@@ -20,7 +20,11 @@ class Blog extends CI_Controller {
 	public function tambah()
 	{
 		$this->load->model('artikel');
+		$this->load->model('category_model');
 		$data = array();
+		$data['kategori'] = $this->category_model->get_category();
+
+
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('input_judul', 'judul_blog', 'required', array('required' => '%s harus diisi '));
 		$this->form_validation->set_rules('input_content', 'content', 'required', array('required' => '%s harus diisi '));
@@ -32,7 +36,7 @@ class Blog extends CI_Controller {
 		
 
 		if($this->form_validation->run()==FALSE) {
-			$this->load->view('form_tambah');
+			$this->load->view('form_tambah', $data);
 		} 
 		else {
 			if ($this->input->post('simpan')) {
@@ -56,35 +60,31 @@ class Blog extends CI_Controller {
 		redirect('blog');
 	}
 
-	public function edit($id_blog) {
+	public function edit($id) {
 		$this->load->model('artikel');
-		$data['artikel'] = $this->artikel->get_single($id_blog);
-		$data = array();
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('input_judul', 'judul_blog', 'required', array('required' => '%s harus diisi '));
-		$this->form_validation->set_rules('input_content', 'content', 'required', array('required' => '%s harus diisi '));
-		$this->form_validation->set_rules('input_tanggal', 'tanggal_blog', 'required', array('required' => '%s harus diisi '));
-		// $this->form_validation->set_rules('input_gambar', 'image', 'required', array('required' => 'isi %s, '));
-		$this->form_validation->set_rules('input_penerbit', 'penerbit', 'required', array('required' => '%s harus diisi '));
-		$this->form_validation->set_rules('input_sumber', 'sumber', 'required', array('required' => '%s harus diisi '));
-		$this->form_validation->set_rules('input_penulis', 'penulis', 'required', array('required' => '%s harus diisi '));
-		
+		$this->load->model('category_model');
+		$data['kategori'] = $this->category_model->get_category();
+		$data['single'] = $this->artikel->get_single($id);
 
-		if($this->form_validation->run()==FALSE) {
-			$this->load->view('form_tambah');
-		} 
-		else {
-			if ($this->input->post('edit')) {
+		if(isset($_POST['simpan'])){
 			$upload=$this->artikel->upload();
-			$this->artikel->edit($upload, $id_blog);
+			$this->artikel->edit($upload,$id);
 			redirect('blog');
 		}
+		
 		$this->load->view('form_edit', $data);
 	}
-		
-	}
-
 }
+
+
+
+		
+	
+
+	    
+    
+
+
 
 /* End of file Blog.php */
 /* Location: ./application/controllers/Blog.php */

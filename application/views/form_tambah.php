@@ -12,7 +12,16 @@
         <tr>
           <td>Content</td>
           <td>:</td>
-          <td><input type="text" name="input_content" value=""></td>
+          <td><input type="text" name="input_content" value="<?php echo set_value('input_content') ?>"></td>
+        </tr>
+        <tr>
+          <label>Kategori : </label>
+          <select name="id_kategori" class="form_control" required>
+            <option value="">Pilih Kategori</option>
+            <?php foreach($kategori as $kategori): ?>
+              <option value="<?php echo $kategori->id_kategori; ?>"><?php echo $kategori->cat_name; ?></option>
+            <?php endforeach; ?>
+          </select>
         </tr>
         <tr>
           <td>Tanggal </td>

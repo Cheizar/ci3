@@ -38,6 +38,9 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="blog">Blog</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="category">Kategori</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -69,6 +72,8 @@
 				</div>
 			<?php endforeach ?>
 		</div>
+
+
 
     <!-- <div class="container">
       <?php
