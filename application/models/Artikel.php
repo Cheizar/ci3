@@ -2,11 +2,28 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Artikel extends CI_Model {
+	function __construct()
+    {
+    	parent::__construct();
+    }
+	
 
-	public function get_artikels(){
+	public function get_artikels( $limit = FALSE, $offset = FALSE ){
+		if ( $limit ) {
+            $this->db->limit($limit, $offset);
+        }
+    
+        $this->db->order_by('blog.id_blog', 'ASC');
+         // $this->db->join('kategori', 'kategori.id_kategori = blog.id_blog');
 		$query = $this->db->get('blog');
 		return $query->result();
 	}	
+
+	public function get_total() 
+    {
+        // Dapatkan jumlah total artikel
+        return $this->db->count_all("blog");
+    }
 
 	public function get_single($id)
 	{
@@ -46,7 +63,7 @@ class Artikel extends CI_Model {
 			'content' => $this->input->post('input_content'),
 			'tanggal_blog' => $this->input->post('input_tanggal'),
 			'image' => $upload['file']['file_name'],
-			'cat_name' => $this->input->post('cat_name')
+			// 'cat_name' => $this->input->post('cat_name')
 		);
 
 		$this->db->insert('blog', $data);

@@ -26,7 +26,7 @@
         <tr>
           <td>Tanggal </td>
           <td>:</td>
-          <td><input type="text" name="input_tanggal" value=""></td>
+          <td><input type="date" name="input_tanggal" value=""></td>
         </tr>
         <tr>
           <td>Gambar</td>

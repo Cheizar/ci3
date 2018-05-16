@@ -11,10 +11,10 @@
     <title>Scrolling Nav - Start Bootstrap Template</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="assets/css/scrolling-nav.css" rel="stylesheet">
+    <link href="<?php echo base_url() ?>assets/css/scrolling-nav.css" rel="stylesheet">
 
   </head>
 
@@ -23,7 +23,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">SMK PGRI 3 MALANG</a>
+        <a class="<?php echo base_url() ?>navbar-brand js-scroll-trigger" href="#page-top">SMK PGRI 3 MALANG</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -41,6 +41,9 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="category">Kategori</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="Datatables">Data Table</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -54,24 +57,26 @@
 
     <div class="container text-center">
 			<?php foreach ($artikel as $key): ?>
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
 					<table style="margin-bottom: 30px;">
 						<tr>
 							<td>
-								<a href="blog/detail/<?php echo $key->id_blog ?>" style="color: black;">
-									<img src="img/<?php echo $key->image;?>" alt="Image" width="500" height="400">
+								<a href="<?php echo base_url() ?>blog/detail/<?php echo $key->id_blog ?>" style="color: black;">
+									<img src="<?php echo base_url() ?>img/<?php echo $key->image;?>" alt="Image" width="500" height="400">
 									<br>
 									<?php echo $key->judul_blog ?>
 								</a>
                 <br></br>
-                <a href="blog/edit/<?php echo $key->id_blog ?>">edit</a>
-                <a href='blog/delete/<?php echo $key->id_blog ?>' class='btn btn-sm btn-danger'>Hapus</a>
+                <a href="<?php echo base_url() ?>blog/edit/<?php echo $key->id_blog ?>">edit</a>
+                <a href='<?php echo base_url() ?>blog/delete/<?php echo $key->id_blog ?>' class='btn btn-sm btn-danger'>Hapus</a>
 							</td>
 						</tr>
 					</table>
 				</div>
 			<?php endforeach ?>
 		</div>
+
+
 
 
 
@@ -108,9 +113,17 @@
 
     <div class="="col-md-6">
       <ul class="footer-nav">
-        <li><a href="blog/tambah">Tambah</a></li>
+        <li><a href="<?php echo base_url() ?>blog/tambah">Tambah</a></li>
       </ul>
     </div>
+
+    <?php 
+    // $links ini berasal dari fungsi pagination 
+    // Jika $links ada (data melebihi jumlah max per page), maka tampilkan
+    if (isset($links)) {
+      echo $links;
+    } 
+    ?>
     
 
     <!-- Footer -->
@@ -122,14 +135,14 @@
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="assets/vendor/jquery/jquery.min.js"></script>
-    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Plugin JavaScript -->
-    <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom JavaScript for this theme -->
-    <script src="assets/js/scrolling-nav.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/scrolling-nav.js"></script>
 
   </body>
 

@@ -27,7 +27,7 @@
         <tr>
           <td>Tanggal </td>
           <td>:</td>
-          <td><input type="text" name="input_tanggal" value="<?php echo $key->tanggal_blog ?>"></td>
+          <td><input type="date" name="input_tanggal" value="<?php echo $key->tanggal_blog ?>"></td>
         </tr>
         <tr>
           <td>Gambar</td>

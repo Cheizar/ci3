@@ -41,6 +41,9 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="category">Kategori</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="Datatables">Data Table</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -53,7 +56,8 @@
     <h1 class="black-text">TAMPIL KATEGORI</h1>
     <br>
     <td><a href='category/create' class='btn btn-sm btn-info'>Tambah</a></td>
-
+    <br>
+    <br>
 
 
     <div class="card-content table-responsive">
