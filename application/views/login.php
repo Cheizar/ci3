@@ -30,134 +30,85 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="welcome">Home</a>
+              <a class="nav-link js-scroll-trigger" href="<?php echo base_url() ?>welcome">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="welcome">About</a>
+              <a class="nav-link js-scroll-trigger" href="<?php echo base_url() ?>welcome">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="blog">Blog</a>
+              <a class="nav-link js-scroll-trigger" href="<?php echo base_url() ?>blog">Blog</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="category">Kategori</a>
+              <a class="nav-link js-scroll-trigger" href="<?php echo base_url() ?>category">Kategori</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="Datatables">Data Table</a>
+              <a class="nav-link js-scroll-trigger" href="<?php echo base_url() ?>Datatables">Data Table</a>
             </li>
           </ul>
           <?php if(!$this->session->userdata('logged_in')) : ?>
 
-                    <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                      <li class="nav-item">
+                    <div class="btn-group" role="group" aria-label="Data baru">
                         <?php echo anchor('user/register', 'Register', array('class' => 'nav-link js-scroll-trigger')); ?>
-                      </li>
-                      <li class="nav-item">
                         <?php echo anchor('user/login', 'Login', array('class' => 'nav-link js-scroll-trigger')); ?>
-                      </li>
-                    </ul>
 
                     </div>
 
                 <?php endif; ?>
 
                 <?php if($this->session->userdata('logged_in')) : ?>
-                    <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                      <li class="nav-item">
+                    <div class="btn-group" role="group" aria-label="Data baru">
+
                         <?php echo anchor('blog/tambah', 'Artikel Baru', array('class' => 'nav-link js-scroll-trigger')); ?>
-                      </li>
-                      <li class="nav-item">
                         <?php echo anchor('category/create', 'Kategori Baru', array('class' => 'nav-link js-scroll-trigger')); ?>
-                      </li>
-                      <li class="nav-item">
                         <?php echo anchor('user/logout', 'Logout', array('class' => 'nav-link js-scroll-trigger')); ?>
-                      </li>
-                    </ul>
                     </div>
                 <?php endif; ?>
         </div>
       </div>
     </nav>
 
-    <header class="bg-primary text-white">
-      <div class="container text-center">
-        <h1>Welcome to SMK PGRI 3 MALANG</h1>
-      </div>
-    </header>
+    <?php if($this->session->flashdata('user_registered')): ?>
+          <?php echo '<div class="alert alert-success" role="alert">'.$this->session->flashdata('user_registered').'</div>'; ?>
+        <?php endif; ?>
+        <?php if($this->session->flashdata('login_failed')): ?>
+          <?php echo '<div class="alert alert-danger">'.$this->session->flashdata('login_failed').'</div>'; ?>
+        <?php endif; ?>
 
-    <div class="container text-center">
-			<?php foreach ($artikel as $key): ?>
-				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-					<table style="margin-bottom: 30px;">
-						<tr>
-							<td>
-								<a href="<?php echo base_url() ?>blog/detail/<?php echo $key->id_blog ?>" style="color: black;">
-									<img src="<?php echo base_url() ?>img/<?php echo $key->image;?>" alt="Image" width="500" height="400">
-									<br>
-									<?php echo $key->judul_blog ?>
-								</a>
-                <br></br>
-                <a href="<?php echo base_url() ?>blog/edit/<?php echo $key->id_blog ?>">edit</a>
-                <a href='<?php echo base_url() ?>blog/delete/<?php echo $key->id_blog ?>' class='btn btn-sm btn-danger'>Hapus</a>
-							</td>
-						</tr>
-					</table>
-				</div>
-			<?php endforeach ?>
-		</div>
+        <?php if($this->session->flashdata('user_loggedin')): ?>
+          <?php echo '<div class="alert alert-success">'.$this->session->flashdata('user_loggedin').'</div>'; ?>
+        <?php endif; ?>
 
+         <?php if($this->session->flashdata('user_loggedout')): ?>
+          <?php echo '<div class="alert alert-success">'.$this->session->flashdata('user_loggedout').'</div>'; ?>
+        <?php endif; ?>
 
-
-
-
-    <!-- <div class="container">
-      <?php
-        // echo form_open('blog/tambah', array('enctype'=>'multipart/form-data')); 
-       ?>
+<div class="container">
+  <?php echo form_open('user/login'); ?>
       <table>
+        <br>
+        <br>
+        <br>
+        <h1><center>Login</center></h1>
         <tr>
-          <td>Judul</td>
+          <td>Username</td>
           <td>:</td>
-          <td><input type="text" name="input_judul" value="<?php echo set_value('input_judul'); ?>"></td>
+          <td><input type="text" name="username" ></td>
         </tr>
         <tr>
-          <td>Content</td>
+          <td>Password</td>
           <td>:</td>
-          <td><input type="text" name="input_content" value=""></td>
+          <td><input type="password" name="password" ></td>
         </tr>
+        
         <tr>
-          <td>Tanggal </td>
-          <td>:</td>
-          <td><input type="text" name="input_tanggal" value=""></td>
-        </tr>
-        <tr>
-          <td>Gambar</td>
-          <td>:</td>
-          <td><input type="file" name="input_gambar"></td>
-        </tr>
-        <tr>
-          <td colspan="3"><input type="submit" name="simpan" value="simpan"></td>
+    <tr>
+        <td colspan="3"><input type="submit" name="Simpan" value="Simpan"></td>
         </tr>
       </table>
-    </div> -->
-
-    <div class="="col-md-6">
-      <ul class="footer-nav">
-        <li><a href="<?php echo base_url() ?>blog/tambah">Tambah</a></li>
-      </ul>
+      <?php echo form_close(); ?>
     </div>
 
-    <?php 
-    // $links ini berasal dari fungsi pagination 
-    // Jika $links ada (data melebihi jumlah max per page), maka tampilkan
-    if (isset($links)) {
-      echo $links;
-    } 
-    ?>
-    
-
-    <!-- Footer -->
+     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
@@ -178,3 +129,4 @@
   </body>
 
 </html>
+

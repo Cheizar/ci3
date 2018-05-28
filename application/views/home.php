@@ -39,6 +39,37 @@
               <a class="nav-link js-scroll-trigger" href="blog">Blog</a>
             </li>
           </ul>
+          <?php if(!$this->session->userdata('logged_in')) : ?>
+
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                      <li class="nav-item">
+                        <?php echo anchor('user/register', 'Register', array('class' => 'nav-link js-scroll-trigger')); ?>
+                      </li>
+                      <li class="nav-item">
+                        <?php echo anchor('user/login', 'Login', array('class' => 'nav-link js-scroll-trigger')); ?>
+                      </li>
+                    </ul>
+
+                    </div>
+
+                <?php endif; ?>
+
+                <?php if($this->session->userdata('logged_in')) : ?>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                      <li class="nav-item">
+                        <?php echo anchor('blog/tambah', 'Artikel Baru', array('class' => 'nav-link js-scroll-trigger')); ?>
+                      </li>
+                      <li class="nav-item">
+                        <?php echo anchor('category/create', 'Kategori Baru', array('class' => 'nav-link js-scroll-trigger')); ?>
+                      </li>
+                      <li class="nav-item">
+                        <?php echo anchor('user/logout', 'Logout', array('class' => 'nav-link js-scroll-trigger')); ?>
+                      </li>
+                    </ul>
+                    </div>
+                <?php endif; ?>
         </div>
       </div>
     </nav>
