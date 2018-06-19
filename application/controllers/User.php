@@ -92,4 +92,22 @@ class User extends CI_Controller{
 		redirect('user/login');
 	}
 
+	// Fungsi Dashboard
+	function dashboard()
+	{
+		// Must login
+		if(!$this->session->userdata('logged_in')) 
+			redirect('user/login');
+
+		$id = $this->session->userdata('id');
+
+		// Dapatkan detail dari User
+		$data['user'] = $this->user_model->get_user_details( $id );
+
+		// Load view
+		$this->load->view('templates/header', $data, FALSE);
+		$this->load->view('dashboard', $data, FALSE);
+		$this->load->view('templates/footer', $data, FALSE);
+	}
+
 }
