@@ -54,14 +54,15 @@ class User extends CI_Controller{
 	$password = md5($this->input->post('password'));
 
 	// Login user
-	$id = $this->user_model->login($username, $password);
+	$id_user = $this->user_model->login($username, $password);
 
-	if($id){
+	if($id_user){
 		// Buat session
 		$user_data = array(
-			'id' => $id,
+			'id_user' => $id_user,
 			'username' => $username,
-			'logged_in' => true
+			'logged_in' => true,
+			'levels' => $this->user_model->get_user_level($id_user)
 		);
 
 		$this->session->set_userdata($user_data);
@@ -69,7 +70,7 @@ class User extends CI_Controller{
 		// Set message
 		$this->session->set_flashdata('user_loggedin', 'Anda sudah login');
 
-		redirect('blog');
+		redirect('user/dashboard');
 	} else {
 		// Set message
 		$this->session->set_flashdata('login_failed', 'Login invalid');
@@ -83,7 +84,7 @@ class User extends CI_Controller{
 	public function logout(){
 		// Unset user data
 		$this->session->unset_userdata('logged_in');
-		$this->session->unset_userdata('id');
+		$this->session->unset_userdata('id_user');
 		$this->session->unset_userdata('username');
 
 		// Set message
@@ -99,15 +100,13 @@ class User extends CI_Controller{
 		if(!$this->session->userdata('logged_in')) 
 			redirect('user/login');
 
-		$id = $this->session->userdata('id');
+		$id_user = $this->session->userdata('id_user');
 
 		// Dapatkan detail dari User
-		$data['user'] = $this->user_model->get_user_details( $id );
+		$data['user'] = $this->user_model->get_user_details($id_user);
 
 		// Load view
-		$this->load->view('templates/header', $data, FALSE);
 		$this->load->view('dashboard', $data, FALSE);
-		$this->load->view('templates/footer', $data, FALSE);
 	}
 
 }

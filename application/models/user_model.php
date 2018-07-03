@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class user_model extends CI_Model {
+class User_model extends CI_Model {
 
     function __construct(){
         parent::__construct();
@@ -14,7 +14,8 @@ class user_model extends CI_Model {
             'telefon' => $this->input->post('telefon'),
             'email' => $this->input->post('email'),
             'username' => $this->input->post('username'),
-            'password' => $enc_password
+            'password' => $enc_password,
+            'fk_level_id' => $this->input->post('membersip')
         );
 
         // Insert user
@@ -31,16 +32,16 @@ class user_model extends CI_Model {
 
 
         if($result->num_rows() == 1){
-            return $result->row(0)->id;
+            return $result->row(0)->id_user;
         } else {
             return false;
         }
+    }
 
-        function get_user_level($id)
-    {
+        public function get_user_level($id_user){
         // Dapatkan data user berdasar $id
-        $this->db->select('fk_level_id');
-        $this->db->where('id', $id);
+        $this->db->select('level_id');
+        $this->db->where('id_user', $id_user);
 
         $result = $this->db->get('user');
 
@@ -51,10 +52,10 @@ class user_model extends CI_Model {
         }
     }
 
-    function get_user_details($id)
+    function get_user_details($id_user)
     {
-        $this->db->join('levels', 'levels.level_id = user.fk_level_id', 'left');
-        $this->db->where('id', $id);
+        $this->db->join('levels', 'levels.level_id = user.level_id', 'left');
+        $this->db->where('id_user', $id_user);
 
         $result = $this->db->get('user');
 
@@ -64,5 +65,5 @@ class user_model extends CI_Model {
             return false;
         }
     }
-    }
+    
 }
